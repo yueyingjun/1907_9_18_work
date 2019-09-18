@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        margin: 0%;
+        padding: 0%;
+    }
+    .box{
+        width: 500px;
+        height: 500px;
+        background: url(http://pic13.nipic.com/20110409/7119492_114440620000_2.jpg)no-repeat 100% 100%;
+        background-size: 500px 500px;
+        border: 1px solid red;
+        cursor: pointer;
+    }
+    .fdj{
+        width: 100px;
+        height: 100px;
+        background: rgba(0, 0, 225, 0.2);
+        position: absolute;
+        left: 0;top: 0;
+        z-index: 999;
+        display: block
+    }
+    .big{
+        width: 400px;
+        height:300px;
+        border: 1px solid black;
+        position: absolute;
+        left: 600px;
+        top: 50px;
+        overflow: hidden;
+    }
+    img{
+        position: absolute;
+        left: 0;top:0 ;
+    }
+</style>
+<script>
+    window.onload=function(){
+        var  box = document.querySelector(".box")
+        var fdj = document.querySelector(".fdj")
+        var big = document.querySelector(".big")
+        var img = document.querySelector(".big img")
+        fdj.onmousedown=function(e){
+            var ox=e.offsetX;
+            var oy=e.offsetY;
+            document.onmousemove=function(e){
+                var x=e.clientX
+                var y=e.clientY
+
+
+                fdj.style.left=x-ox+"px"
+                fdj.style.top=y-oy+"px"
+                img.style.left=-(x-ox+70)+"px"
+                img.style.top=-(y-oy+40)+"px"
+            }
+        }
+        document.onmouseup=function(){
+            document.onmousemove=null
+        }
+        box.onmouseover= function(){
+            fdj.style.display="block"
+            big.style.display="block"
+        }
+        box.onmouseout= function(){
+            fdj.style.display="none"
+            big.style.display="none"
+        }
+    }
+</script>
+<body>
+<div class="box">
+    <div class="fdj"></div>
+</div>
+<div class="big">
+    <img src="http://pic13.nipic.com/20110409/7119492_114440620000_2.jpg" alt="" height="200% ;width="200%" ">
+</div>
+</body>
+</html>
