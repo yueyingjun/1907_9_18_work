@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>fd</title>
+</head>
+<style>
+    body{
+        padding: 0;
+        margin: 0;
+    }
+    .a{
+        width: 450px;
+        height: 450px;
+        background: url("https://img.alicdn.com/imgextra/i4/3363123485/O1CN01tJb73d1bcAoh0MpYv_!!3363123485.jpg_430x430q90.jpg");
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .a-top{
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .fd{
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: ;
+        opacity: 0.3;
+        display: none;
+
+    }
+    .b-a{
+        width: 450px;
+        height: 450px;
+        position: absolute;
+        top: 0;
+        left: 500px;
+        overflow: hidden;
+        display: none;
+    }
+    .b-a-img{
+        width: 900px;
+        height: 900px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: url("https://img.alicdn.com/imgextra/i4/3363123485/O1CN01tJb73d1bcAoh0MpYv_!!3363123485.jpg_430x430q90.jpg") no-repeat;
+        background-size: 900px auto;
+    }
+</style>
+<script>
+    window.onload=function () {
+        var pic =document.querySelector(".a")
+        var fangda =document.querySelector(".fd")
+        var picT =document.querySelector(".a-top")
+        var Bpic =document.querySelector(".b-a")
+        var BpicI =document.querySelector(".b-a-img")
+        pic.onmouseover=function () {
+            fangda.style.display="block"
+            Bpic.style.display="block"
+            picT.onmousemove=function (a) {
+                var x=a.offsetX
+                var y=a.offsetY
+                if (x<fangda.offsetWidth/2){
+                    x=fangda.offsetWidth/2
+                }
+                if (y<fangda.offsetHeight/2){
+                    y=fangda.offsetHeight/2
+                }
+                if (x>pic.offsetWidth-fangda.offsetWidth/2) {
+                    x=pic.offsetWidth-fangda.offsetWidth/2
+                }
+                if (y>pic.offsetHeight-fangda.offsetHeight/2){
+                    y=pic.offsetHeight-fangda.offsetHeight/2
+                }
+                fangda.style.left=x-fangda.offsetWidth/2+"px"
+                fangda.style.top=y-fangda.offsetHeight/2+"px"
+
+                BpicI.style.left=-(BpicI.offsetWidth/pic.offsetWidth)*(x-fangda.offsetWidth/2)+"px"
+                BpicI.style.top=-(BpicI.offsetHeight/pic.offsetHeight)*(y-fangda.offsetHeight/2)+"px"
+            }
+            picT.onmouseout=function () {
+                fangda.style.display="none"
+                Bpic.style.display="none"
+            }
+        }
+    }
+</script>
+<body>
+<div class="a">
+    <div class="fd"></div>
+    <div class="a-top"></div>
+</div>
+<div class="b-a">
+    <div class="b-a-img"></div>
+</div>
+</body>
+</html>
