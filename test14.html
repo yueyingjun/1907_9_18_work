@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>magnifier</title>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+        }
+        .magnifier-inner{
+            width:100px;
+            height:100px;
+            border:1px solid #ccc;
+            background:rgba(200,200,200,0.8);
+            position:absolute;
+            left:0;
+            top:0;
+        }
+        .magnifier-outer{
+            width:200px;
+            height:200px;
+            border:1px solid black;
+            background:url("http://pic31.nipic.com/20130728/8886898_150339538164_2.jpg") no-repeat center;
+            background-size:1200px 700px;
+            background-position:0 0;
+            position:absolute;
+            left:650px;
+            top:50px;
+        }
+        .img{
+            width:600px;
+            height:350px;
+            background:url("http://pic31.nipic.com/20130728/8886898_150339538164_2.jpg") no-repeat center;
+            background-size:600px 350px;
+        }
+    </style>
+    <script src="donghua.js"></script>
+    <script>
+        window.onload=function(){
+            var div1 = document.querySelector(".magnifier-inner");
+            var div2 = document.querySelector(".magnifier-outer");
+            var img = document.querySelector(".img");
+            var left1,top1,left2,top2;
+            div1.style.display="none";
+            div2.style.display="none";
+            img.onmouseover=function(){
+                div1.style.display="block";
+                div2.style.display="block";
+                div1.onmousedown=function(a){
+                    left1=a.offsetX;
+                    top1=a.offsetY;
+                    document.onmousemove=function(a){
+                        left2=a.clientX;
+                        top2=a.clientY;
+                        a.preventDefault();
+                        div1.style.left=left2-left1+"px";
+                        div1.style.top=top2-top1+"px";
+                        div2.style="background-position:"+2*(left1-left2)+"px "+2*(top1-top2)+"px;";
+
+                        if(left2>=500){div1.style.left=500+"px";div2.style="background-position:"+(-1000)+"px "+2*(top1-top2)+"px;"}
+                        if(top2>=250){div1.style.top=250+"px";div2.style="background-position:"+2*(left1-left2)+"px "+(-500)+"px;"}
+                    }
+                    document.onmouseup=function(a){
+                        document.onmousemove=null;
+                    }
+                }
+            }
+            img.onmouseout=function(){
+                div1.style.display="none";
+                div2.style.display="none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="img"></div>
+    <div class="magnifier-outer"></div>
+    <div class="magnifier-inner"></div>
+</body>
+</html>
