@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .pic{
+            width: 400px;
+            height: 400px;
+            position: relative;
+        }
+        .pic img{
+            width: 100%;
+            height: 100%;
+        }
+        .kuang{
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            background-color: #01b5ff;
+            opacity: 0;
+            left: 0;
+            top: 0;
+        }
+        .fangda{
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            right: -400px;
+            top: 0;
+            display: none;
+            overflow: hidden;
+        }
+        .fangda img{
+            width: 200%;
+            height: 200%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            var pic=document.querySelector(".pic")
+            var kuang=document.querySelector(".kuang")
+            var fangda=document.querySelector(".fangda")
+            var img=document.querySelector(".fangda img")
+            pic.onmouseover=function () {
+                kuang.style.opacity=0.5
+                fangda.style.display="block"
+                pic.onmousemove=function (e) {
+                    var x=e.clientX
+                    var y=e.clientY
+                    console.log(x)
+                    console.log(y)
+                    if (x>pic.offsetWidth-kuang.offsetWidth/2){
+                        x=pic.offsetWidth-kuang.offsetWidth/2
+                        console.log(x)
+                    }
+                    if (x<kuang.offsetWidth/2){
+                        x=kuang.offsetWidth/2
+                    }
+                    if (y>pic.offsetHeight-kuang.offsetHeight/2){
+                        y=pic.offsetHeight-kuang.offsetHeight/2
+                    }
+                    if (y<kuang.offsetHeight/2) {
+                        y=kuang.offsetHeight/2
+                    }
+                    kuang.style.left=(x-kuang.offsetWidth/2)+"px"
+                    kuang.style.top=(y-kuang.offsetHeight/2)+"px"
+                    img.style.left=-2*(x-kuang.offsetWidth/2)+"px"
+                    img.style.top=-2*(y-kuang.offsetHeight/2)+"px"
+                }
+            }
+            pic.onmouseout=function () {
+                kuang.style.opacity=0
+                fangda.style.display="none"
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="pic">
+    <img src="../img/tupian.jpg" alt="">
+    <div class="kuang"></div>
+    <div class="fangda">
+        <img src="../img/tupian.jpg" alt="">
+    </div>
+</div>
+
+
+</body>
+</html>
