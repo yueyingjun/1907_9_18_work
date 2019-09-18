@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .div1{
+            width:200px;
+            height: 200px;
+            position: relative;
+            float: left;
+            border: 1px solid #ccc;
+            margin: 100px 30px 0 100px;
+        }
+        .div1>img{
+            width:200px;
+            height: 200px;
+            display: block;
+            position: absolute;top:0;left:0;
+        }
+        .amp{
+            /* display: none; */
+            width:100px;
+            height: 100px;
+            background-color: red;
+            opacity: 0.2;
+            position:absolute;
+            /* left:0;top:0; */
+            z-index: 10;
+        }
+        .div2{
+            width:400px;
+            height: 400px;
+            float: left;
+            background-image: url(https://img14.360buyimg.com/n0/jfs/t1/2430/39/14315/332063/5bdac102Efd076d83/1d04e513bdb9c92b.jpg);
+            border: 1px solid #ccc;
+            background-repeat: no-repeat;
+            /* background-position: -200px -200px; */
+            background-size: 800px 800px;
+            /* display: none; */
+        }
+       
+    </style>
+<script>
+    window.onload=function(){
+        var div1 = document.querySelector(".div1");
+        var div2 = document.querySelector(".div2");
+        var amp = document.querySelector(".amp");
+        amp.style.display="none";
+        div2.style.display="none";
+        div1.onmouseover=function(){
+            amp.style.display="block";
+            div2.style.display="block";
+            amp.onmousedown=function(e){
+                var x = e.offsetX;
+                var y = e.offsetY;
+                amp.onmousemove=function(e){
+                    var x0=e.clientX;
+                    var y0=e.clientY;
+                    var amp_X=x0-x-110;
+                    var amp_Y=y0-y-110;
+                    if(amp_X<=100&&amp_X>=0&&amp_Y<=100&&amp_Y>=0){
+                        amp.style="left:"+amp_X+"px;top:"+amp_Y+"px;";     
+                    }else if(amp_X>=100&&amp_X>=0&&amp_Y<=100&&amp_Y>=0){
+                        amp.style="left:"+100+"px;top:"+amp_Y+"px;";
+                    }else if(amp_X<=100&&amp_X<=0&&amp_Y<=100&&amp_Y>=0){
+                        amp.style="left:"+0+"px;top:"+amp_Y+"px;";
+                    }else if(amp_X<=100&&amp_X>=0&&amp_Y>=100&&amp_Y>=0){
+                        amp.style="left:"+amp_X+"px;top:"+100+"px;";     
+                    }else if(amp_X<=100&&amp_X>=0&&amp_Y<=100&&amp_Y<=0){
+                        amp.style="left:"+amp_X+"px;top:"+0+"px;";     
+                    }
+                    div2.style="background-position:"+(-amp_X*4)+"px "+(-amp_Y*4)+"px;"
+                }
+                amp.onmouseup = function(){
+                    amp.onmousemove = null;
+                }
+
+            }
+        }
+        div1.onmouseout=function(){
+            amp.style.display="none";
+            div2.style.display="none";
+        }
+        
+
+    }
+</script>
+</head>
+<body>
+    <div class="div1"><div class="amp"></div><img src="https://img14.360buyimg.com/n0/jfs/t1/2430/39/14315/332063/5bdac102Efd076d83/1d04e513bdb9c92b.jpg" alt=""></div>
+    <div class="div2"></div>
+</body>
+</html>
