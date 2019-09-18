@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        padding: 0;
+        margin: 0;
+    }
+    .pic{
+        width: 450px;
+        height: 450px;
+        /*border:1px solid red ;*/
+        background: url("https://img10.360buyimg.com/n1/s450x450_jfs/t1/54894/18/5992/139602/5d3ac106Ec4692d1b/50e4008284929a99.jpg");
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .pic-top{
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .fangda{
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: red;
+        opacity: 0.3;
+        display: none;
+
+    }
+    .big-pic{
+        width: 450px;
+        height: 450px;
+        position: absolute;
+        top: 0;
+        left: 500px;
+        /*border: 1px solid red;*/
+        overflow: hidden;
+        display: none;
+    }
+    .big-pic-img{
+        width: 900px;
+        height: 900px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: url("https://img10.360buyimg.com/n1/s450x450_jfs/t1/54894/18/5992/139602/5d3ac106Ec4692d1b/50e4008284929a99.jpg") no-repeat;
+        background-size: 900px auto;
+    }
+</style>
+<script>
+    window.onload=function () {
+     var pic =document.querySelector(".pic")
+     var fangda =document.querySelector(".fangda")
+     var picT =document.querySelector(".pic-top")
+     var Bpic =document.querySelector(".big-pic")
+     var BpicI =document.querySelector(".big-pic-img")
+        pic.onmouseover=function () {
+            fangda.style.display="block"
+            Bpic.style.display="block"
+            picT.onmousemove=function (a) {
+                var x=a.offsetX
+                var y=a.offsetY
+                if (x<fangda.offsetWidth/2){
+                    x=fangda.offsetWidth/2
+                }
+                if (y<fangda.offsetHeight/2){
+                    y=fangda.offsetHeight/2
+                }
+                if (x>pic.offsetWidth-fangda.offsetWidth/2) {
+                    x=pic.offsetWidth-fangda.offsetWidth/2
+                }
+                if (y>pic.offsetHeight-fangda.offsetHeight/2){
+                    y=pic.offsetHeight-fangda.offsetHeight/2
+                }
+                fangda.style.left=x-fangda.offsetWidth/2+"px"
+                fangda.style.top=y-fangda.offsetHeight/2+"px"
+
+                BpicI.style.left=-(BpicI.offsetWidth/pic.offsetWidth)*(x-fangda.offsetWidth/2)+"px"
+                BpicI.style.top=-(BpicI.offsetHeight/pic.offsetHeight)*(y-fangda.offsetHeight/2)+"px"
+            }
+            picT.onmouseout=function () {
+                fangda.style.display="none"
+                Bpic.style.display="none"
+            }
+        }
+    }
+</script>
+<body>
+<div class="pic">
+    <div class="fangda"></div>
+    <div class="pic-top"></div>
+</div>
+<div class="big-pic">
+    <div class="big-pic-img"></div>
+</div>
+</body>
+</html>
