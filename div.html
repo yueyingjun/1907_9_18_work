@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script>
+    window.onload = function () {
+        var div = document.querySelector(".fa")
+        var box = document.querySelector(".box")
+        var jing = document.querySelector(".jing")
+        var img = document.querySelector("img")
+
+        div.onmousedown = function (e) {
+            var ox = e.offsetX
+            var oy = e.offsetY
+            div.onmousemove =function (e) {
+                var cx = e.clientX-ox
+                var cy = e.clientY-oy
+                if(cx+div.offsetWidth  >box.offsetWidth  ){
+
+                }else if(cy+div.offsetHeight > box.offsetHeight){
+
+                }else{
+                    div.style.left = cx + "px"
+                    div.style.top = cy + "px"
+                    e.preventDefault()
+                   var left = e.clientX-div.offsetWidth/2
+                    var top = e.clientY-div.offsetHeight/2
+
+                    img.style.left = -(left*1.5) + "px"
+                    img.style.top = -(top*1.5) + "px"
+
+                }
+            }
+            div.onmouseup = function () {
+                document.onmousemove = null
+            }
+        }
+    }
+
+    
+</script>
+
+<style>
+    .fa{
+        height: 100px;
+        width: 100px;
+        border: 1px solid black;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: rgba(255,0,0,.5);
+    }
+    .box{
+        height: 400px;
+        width: 400px;
+        background:url("https://img.alicdn.com/imgextra/i1/2076503458/O1CN01s7zL2G1bPo9dkirwR_!!2076503458-0-pixelsss.jpg_430x430q90.jpg");
+        background-size: 100%;
+    }
+    .jing{
+        height: 400px;
+        width: 400px;
+        overflow: hidden;
+
+
+        position: fixed;
+        top: 0;
+        left: 800px;
+       }
+    img{
+        height: 200% ;
+        width: 200%;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+</style>
+<body>
+<div class="box">
+    <div class="fa">
+
+    </div>
+</div>
+<div class="jing">
+    <img src="https://img.alicdn.com/imgextra/i1/2076503458/O1CN01s7zL2G1bPo9dkirwR_!!2076503458-0-pixelsss.jpg_430x430q90.jpg"  >
+</div>
+
+
+</body>
+</html>
