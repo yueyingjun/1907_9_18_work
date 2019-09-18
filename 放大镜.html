@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        margin: 0%;
+        padding: 0%;
+    }
+    .box{
+        width: 400px;
+        height: 300px;
+        background: url(http://hbimg.b0.upaiyun.com/2313d3f6e283f109e9c256befcee063672246f8314f9f-xf0jyg_fw658)no-repeat 100% 100%;
+        border: 1px solid red;
+        cursor: pointer;
+    }
+    .fdj{
+        width: 100px;
+        height: 100px;
+        background: rgba(0, 0, 225, 0.2);
+        position: absolute;
+            left: 0;top: 0;
+        z-index: 999;
+        display: block
+    }
+    .big{
+        width: 400px;
+        height:300px;
+        border: 1px solid black;
+        position: absolute;
+        left: 420px;
+        top: 50px;
+        overflow: hidden;
+    }
+    img{
+        width: 1200px;
+        height:900px;
+        border: 1px solid black;
+        position: absolute;
+        background: url(http://hbimg.b0.upaiyun.com/2313d3f6e283f109e9c256befcee063672246f8314f9f-xf0jyg_fw658)no-repeat 100% 100%;
+        background-size:1200px auto 
+    }
+</style>
+<script>
+    window.onload=function(){
+        var  box = document.querySelector(".box")
+         var fdj = document.querySelector(".fdj")
+         var big = document.querySelector(".big")
+         var img = document.querySelector(".big img")
+            fdj.onmousedown=function(e){
+                var ox=e.offsetX;
+                var oy=e.offsetY;
+                document.onmousemove=function(e){
+                    if (ox <= 100) {
+                        ox = 100
+                    }
+                    if (ox >= 400) {
+                        ox = 400
+                    }
+                    if (oy <= 100) {
+                        oy = 100
+                    }
+                    if (oy >= 300) {
+                        oy = 300
+                    }
+                    var x=e.clientX
+                    var y=e.clientY
+                    fdj.style.left=x-ox+"px"
+                    fdj.style.top=y-oy+"px"
+                    img.style.left=-3*(x-ox)+"px"
+                    img.style.top=-3*(y-oy)+"px"
+                }      
+            }
+            document.onmouseup=function(){
+                 document.onmousemove=null
+            }
+         box.onmouseover= function(){
+             fdj.style.display="block"
+             big.style.display="block"
+         } 
+         box.onmouseout= function(){
+             fdj.style.display="none"
+             big.style.display="none"
+         }  
+        }
+</script>
+<body>
+    <div class="box">
+        <div class="fdj"></div>
+    </div>
+    <div class="big">
+            <img>
+    </div>
+</body>
+</html>
