@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>放大镜</title>
+    <style>
+        body{
+            margin: 0;padding: 0;
+        }
+        .box{
+            width: 400px;
+            height: 400px;
+            background: url("https://gd3.alicdn.com/imgextra/i1/2929283232/TB2Qxxeo8jTBKNjSZFuXXb0HFXa_!!2929283232.jpg_400x400.jpg");
+            position: absolute;
+            margin-left: 0px;
+            margin-top: 0px;
+
+        }
+        .fdj{
+            width: 200px;
+            height: 200px;
+            background: brown;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0.2;
+            display: none;
+        }
+        .bigbox{
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 410px;
+            overflow: hidden;
+        }
+        .bigimg{
+            width: 700px;height: 700px;
+            background-image: url("https://gd3.alicdn.com/imgextra/i1/2929283232/TB2Qxxeo8jTBKNjSZFuXXb0HFXa_!!2929283232.jpg_400x400.jpg");
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            background-size: 800px auto;
+            display: none;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var box = document.querySelector(".box")
+            var fdj = document.querySelector(".fdj")
+            var bigbox = document.querySelector(".bigbox")
+            var bigimg = document.querySelector(".bigimg")
+            box.onmouseover = function(e){
+
+                fdj.style.display="block"
+                bigimg.style.display="block"
+                var ox = e.offsetX
+                var oy = e.offsetY
+                box.onmousemove=function(e){
+                    var cx = e.clientX
+                    var cy = e.clientY
+                    fdj.style.left = cx-ox + "px";
+                    fdj.style.top = cy-oy+ "px";
+                    bigbox.style.display = "block";
+
+                    e.preventDefault();
+
+                    bigimg.style.left=(-cx*1.5+100)+"px"
+                    bigimg.style.top=(-cy*1.5+100)+"px"
+
+                }
+                fdj.onmouseup = function(){
+                    box.onmousemove = null;
+                    bigbox.style.display = "none";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <div class="fdj"></div>
+</div>
+
+<div class="bigbox">
+    <img class="bigimg">
+</div>
+
+</body>
+</html>
