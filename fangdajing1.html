@@ -1,0 +1,111 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        padding: 0;
+        margin: 0;
+    }
+    .box{
+        width: 500px;
+        height: 500px;
+        /*border:1px solid red ;*/
+        background: url("https://asearch.alicdn.com/bao/uploaded/O1CN01U8SaO61M0PxBf8Bkp_!!0-item_pic.jpg_320x320.jpg") no-repeat;
+        background-size: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .xiaotu{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 10;
+
+    }
+    .touming{
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: blue;
+        opacity: 0.2;
+        display: none;
+
+    }
+    .bigbox{
+        width: 500px;
+        height: 500px;
+        position: absolute;
+        top: 0;
+        left: 550px;
+        overflow: hidden;
+        display: none;
+    }
+    .datu{
+        width: 1000px;
+        height: 1000px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: url("https://asearch.alicdn.com/bao/uploaded/O1CN01U8SaO61M0PxBf8Bkp_!!0-item_pic.jpg_320x320.jpg") no-repeat;
+        background-size: 100%;
+    }
+</style>
+<script>
+    window.onload=function () {
+        var box =document.querySelector(".box")
+        var touming =document.querySelector(".touming")
+        var xiaotu =document.querySelector(".xiaotu")
+        var bigbox =document.querySelector(".bigbox")
+        var datu =document.querySelector(".datu")
+        box.onmouseover=function (e) {
+            touming.style.display="block"
+            bigbox.style.display="block"
+
+            xiaotu.onmousemove=function (e) {
+                var ox = e.offsetX
+                var oy = e.offsetY
+                var tow = touming.offsetWidth
+                var toh = touming.offsetHeight
+                var bow = box.offsetWidth
+                var boh = box.offsetHeight
+                if(ox>bow-tow){
+                    ox=bow-tow
+                }
+                if(oy>boh-toh){
+                    oy=boh-toh
+                }
+                touming.style.left =ox+"px"
+                touming.style.top =oy+"px"
+                datu.style.left = -ox+"px"
+                datu.style.top = -oy+"px"
+            }
+
+            xiaotu.onmouseout=function () {
+                touming.style.display="none"
+                bigbox.style.display="none"
+            }
+        }
+    }
+</script>
+<body>
+<div class="box">
+    <div class="touming"></div>
+    <div class="xiaotu"></div>
+</div>
+<div class="bigbox">
+    <div class="datu"></div>
+</div>
+</body>
+</html>
