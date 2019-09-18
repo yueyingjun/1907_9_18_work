@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .img1{
+            width: 200px;
+            height: 120px;
+            float: left;
+            background-image: url("flower.jpg");
+            background-size: 200px 120px;
+            position: relative;
+        }
+        .box{
+            width: 40px;
+            height: 24px;
+            background: rgba(0,0,0,0.3);
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+
+        }
+        .img2{
+            width: 200px;
+            height: 120px;
+            margin-left: 50px;
+            overflow: hidden;
+            float: left;
+            position: relative;
+            display: none;
+        }
+        .big{
+            background-image: url("flower.jpg");
+            height: 240px;
+            width: 400px;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            var img1=document.querySelector(".img1")
+            var box=document.querySelector(".box")
+            var img2=document.querySelector(".img2")
+            var big=document.querySelector(".big")
+            var iw1=img1.offsetWidth
+            var ih1=img1.offsetHeight
+
+
+            img1.onmousemove=function (e) {
+              img2.style.display="block"
+                box.style.display="block"
+                var bw=box.offsetWidth
+                var bh=box.offsetHeight
+                if(e.clientX>iw1-bw/2){
+                     box.style.left=iw1-bw+"px"
+                }else {
+                    box.style.left=e.clientX-bw/2+"px"
+                }
+                if(e.clientY>ih1-bh/2){
+                    box.style.top=ih1-bh+"px"
+                }else {
+                    box.style.top=e.clientY-bh/2+"px"
+                }
+
+                var oL=box.offsetLeft
+
+                var oT=box.offsetTop
+
+                var a=img1.offsetWidth-box.offsetWidth
+                var b=big.offsetWidth-img2.offsetWidth
+                var movew=-(oL/a)*b;
+                big.style.left=movew+"px"
+
+                var c=img1.offsetHeight-box.offsetHeight
+                var d=big.offsetHeight-img2.offsetHeight
+                var movet=-(oT/c)*d;
+                big.style.top=movet+"px"
+
+
+                img1.onmouseleave=function () {
+                    img2.style.display="none"
+                    box.style.display="none"
+                }
+
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="img1">
+   <div class="box"></div>
+</div>
+<div class="img2">
+    <img src="flower.jpg" alt="" class="big">
+</div>
+</body>
+</html>
