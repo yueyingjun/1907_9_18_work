@@ -80,8 +80,9 @@
             background: url("https://img.alicdn.com/imgextra/i2/2097567973/O1CN01cp3WEF28lgOHmifc9_!!0-item_pic.jpg_430x430q90.jpg")no-repeat;
             background-size: 100% 100%;
             position: absolute;
-            top:0;
-            left:0
+            top:0px;
+            left:0px;
+
         }
     </style>
 
@@ -109,7 +110,7 @@
             var view = document.querySelector(".view")
             var nrs = document.querySelectorAll(".view .nr")
             var xs = document.querySelector(".xs")
-            var fdtp = document.querySelector(".fdtp:nth-of-type(1)")
+            var fdtp = document.querySelector(".fdtp")
             var l1 = 0, t1 = 0, l2 = 0, t2 = 0,x,y
 
             for (let i = 0; i < nrs.length; i++) {
@@ -129,12 +130,11 @@
                         t2 = t1 - 75
 
 
-                        x=-l2*3
-                        y=-t2*3
+
                         var x2 = x*3
                         var y2 = y*3
-                        fdtp.style.marginleft =-x2+"px"
-                        fdtp.style.marginTop =-y2+"px"
+
+
                         console.log(l1, t1, l2, t2,x2,y2)
 
                         if (l2 <= 0) {
@@ -149,8 +149,12 @@
                         if (t2 >= 250) {
                             t2 = 250
                         }
+                        x=-l2*3
+                        y=-t2*3
                         one.style.left = l2 + "px"
                         one.style.top = t2 + "px"
+                        fdtp.style.left = x + "px"
+                        fdtp.style.top = y + "px"
 
 
                     }
@@ -185,9 +189,6 @@
         <a href="javascript:;"></a>
     </div>
     <div class="xs">
-        <div class="fdtp"></div>
-        <div class="fdtp"></div>
-        <div class="fdtp"></div>
         <div class="fdtp"></div>
     </div>
 </div>
