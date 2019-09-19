@@ -8,6 +8,7 @@
     <title>Document</title>
     <script>
         window.onload = function () {
+
             var pic = document.querySelector(".pic")
             var picimg = document.querySelector(".pic>img")
 
@@ -27,6 +28,9 @@
             for (let i = 0; i < suolve.length; i++) {
                 suolve[i].onclick = function () {
                     picimg.src = "img/t" + i + ".jpg"
+
+
+
                     bigimg.src = "img/t" + i + ".jpg"
                     console.log(bigimg.src)
                     console.log(i)
@@ -125,6 +129,8 @@
             border: 3px solid #888888;
 
 
+
+
         }
 
         .pic > div {
@@ -148,6 +154,7 @@
         }
 
 
+
         .fang {
             height: 50px;
             width: 50px;
@@ -165,7 +172,15 @@
             height: 60px;
             width: 60px;
             float: left;
+            cursor: pointer;
+            transition: all 0.15s linear;
         }
+        .suolve>img:hover{
+            box-shadow: 0 0 7px black;
+            transform: scale(1.1,1.1);
+
+        }
+
     </style>
 </head>
 
