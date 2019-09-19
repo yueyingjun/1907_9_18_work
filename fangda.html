@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            var pic = document.querySelector(".pic")
+            var picimg = document.querySelector(".pic>img")
+
+            var fang = document.querySelector(".fang")
+            var bigpic = document.querySelector(".bigpic")
+            var bigimg = document.querySelector(".bigpic>img")
+            var suolve = document.querySelectorAll(".suolve>img")
+
+            pic.onmouseover = function () {
+                fang.style.display = "block"
+                bigpic.style.display = "block"
+            };
+            pic.onmouseout = function () {
+                fang.style.display = "none"
+                bigpic.style.display = "none"
+            };
+            for (let i = 0; i < suolve.length; i++) {
+                suolve[i].onclick = function () {
+                    picimg.src = "img/t" + i + ".jpg"
+                    bigimg.src = "img/t" + i + ".jpg"
+                    console.log(bigimg.src)
+                    console.log(i)
+                }
+            }
+
+            pic.onmousemove = function (e) {
+
+                var x = e.clientX
+                var y = e.clientY
+                console.log(x)
+                fang.style.left = x - (fang.offsetWidth / 2) + 'px'
+                fang.style.top = y - (fang.offsetHeight / 2) + 'px'
+                if (fang.offsetLeft < 0) {
+                    fang.style.left = 0
+                }
+                if (fang.offsetTop < 0) {
+                    fang.style.top = 0
+                }
+                if (fang.offsetLeft > pic.offsetWidth - fang.offsetWidth) {
+                    fang.style.left = pic.offsetWidth - fang.offsetWidth + "px"
+                }
+                if (fang.offsetTop > pic.offsetHeight - fang.offsetHeight) {
+                    fang.style.top = pic.offsetHeight - fang.offsetHeight + "px"
+                }
+                if (x > pic.offsetWidth) {
+                    bigimg.style.left = bigpic.offsetWidth + bigimg.offsetWidth + "px"
+                    console.log(1)
+                }
+
+
+                // if ((fang.offsetLeft + fang.offsetWidth) > (pic.offsetWidth)) {
+                //     fang.style.left = pic.offsetWidth - fang.offsetWidth
+                //
+                // }
+                // var n = pic.offsetWidth/fang.offsetWidth
+                // var bigx= x+'px'
+                // var bigy= y+'px'
+                // var imgx= x*n+'px'
+                // var imgy= y*n+'px'
+                //
+                // bigimg.style.left=imgx
+                // bigimg.style.top=imgy
+                // bigpic.style.left=bigx
+                // bigpic.style.top=bigy
+
+                var xk = pic.offsetWidth - fang.offsetWidth
+                var dk = bigimg.offsetWidth - bigpic.offsetWidth
+                var n = dk / xk
+                console.log(n)
+
+
+                bigimg.style.left = -(fang.offsetLeft) * n + "px"
+                bigimg.style.top = -(fang.offsetTop) * n + "px"
+
+
+            }
+
+
+        }
+
+    </script>
+    <script>
+
+    </script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .pic {
+            /*width: 1440px;*/
+            /*height: 900px;*/
+            width: 300px;
+            height: 170px;
+
+            position: relative;
+        }
+
+        .pic > img {
+            width: 300px;
+            height: 170px;
+
+        }
+
+        .bigpic {
+            width: 350px;
+            height: 350px;
+            float: left;
+            position: absolute;
+            overflow: hidden;
+            top: 0;
+            left: 350px;
+            display: none;
+            border: 3px solid #888888;
+
+
+        }
+
+        .pic > div {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            z-index: 2;
+            left: 0;
+            top: 0;
+            cursor: move;
+
+        }
+
+
+        .bigpic > img {
+
+            position: absolute;
+            left: 0;
+            top: 0;
+
+        }
+
+
+        .fang {
+            height: 50px;
+            width: 50px;
+            background: cornflowerblue;
+            opacity: 0.5;
+            position: absolute;
+            left: 0;
+            top: 0;
+            cursor: move;
+            display: none;
+        }
+
+
+        .suolve > img {
+            height: 60px;
+            width: 60px;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="pic">
+    <img src="img/t0.jpg" alt="">
+
+    <div></div>
+</div>
+<div class="fang"></div>
+
+<div class="bigpic">
+    <img src="img/t0.jpg" alt="">
+
+</div>
+
+
+<div class="suolve">
+    <img src="img/t0.jpg" alt="">
+    <img src="img/t1.jpg" alt="">
+    <img src="img/t2.jpg" alt="">
+    <img src="img/t3.jpg" alt="">
+    <img src="img/t4.jpg" alt="">
+</div>
+</body>
+</html>
