@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .box{
+        height: 200px;width: 200px;
+        background: url("http://pic.rmb.bdstatic.com/f54083119edfb83c4cfe9ce2eeebc076.jpeg");
+        position: relative;
+        overflow: hidden;
+
+    }
+    .ma{
+        height: 100px;width: 100px;
+        background-color: #1b79ff;
+        opacity:0;
+        position: absolute;
+        left: 0;top: 0;
+    }
+    .big{
+        height: 400px;width: 400px;
+        background: url("big.png") no-repeat;
+        background-size: 100% auto;
+        position: relative;
+    }
+    .bbig{
+        display: none;
+        height: 200px;width: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+</style>
+<script>
+    window.onload=function () {
+        var box=document.querySelector(".box")
+        var ma=document.querySelector(".ma")
+        var big=document.querySelector(".big")
+        var bbig=document.querySelector(".bbig")
+        var x
+        var y
+           box.onmouseover=function(){
+               box.onmousemove=function (e) {
+                   bbig.style.display="block"
+                   x=e.clientX
+                   y=e.clientY
+                   ma.style.opacity=0.5
+                   ma.style.left=x-50+"px"
+                   ma.style.top=y-50+"px"
+                   big.style.left=(-x+50)*2+"px"
+                   big.style.top=(-y+50)*2+"px"
+               }
+           }
+            box.onmouseout=function () {
+                box.onmousemove=null
+                ma.style.opacity=0
+                bbig.style.display="none"
+            }
+
+    }
+</script>
+<body>
+<div class="box">
+    <div class="ma"></div>
+</div>
+<div class="bbig">
+<div class="big"></div>
+</div>
+</body>
+</html>
