@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>放大镜</title>
+    <style>
+        .yt{
+            width:200px;
+            height: 200px;
+            position: relative;
+            float: left;
+            border: 1px solid #ccc;
+            margin: 100px 30px 0 100px;
+        }
+        .yt>img{
+            width:200px;
+            height: 200px;
+            display: block;
+            position: absolute;top:0;left:0;
+        }
+        .tp{
+            width:100px;
+            height: 100px;
+            background-color: red;
+            opacity: 0.2;
+            position:absolute;
+            z-index: 10;
+        }
+        .dt{
+            width:400px;
+            height: 400px;
+            float: left;
+            background-image: url(250.jpg);
+            border: 1px solid #ccc;
+            background-repeat: no-repeat;
+            background-size: 800px 800px;
+        }
+
+    </style>
+<script>
+    window.onload=function(){
+        var yt = document.querySelector(".yt");
+        var dt = document.querySelector(".dt");
+        var tp = document.querySelector(".tp");
+        tp.style.display="none";
+        dt.style.display="none";
+        yt.onmouseover=function(){
+            tp.style.display="block";
+            dt.style.display="block";
+            tp.onmousedown=function(e){
+                var x = e.offsetX;
+                var y = e.offsetY;
+                tp.onmousemove=function(e){
+                    var x0=e.clientX;
+                    var y0=e.clientY;
+                    var tp_X=x0-x-110;
+                    var tp_Y=y0-y-110;
+                    if(tp_X<=100&&tp_X>=0&&tp_Y<=100&&tp_Y>=0){
+                        tp.style="left:"+tp_X+"px;top:"+tp_Y+"px;";
+                    }else if(tp_X>=100&&tp_X>=0&&tp_Y<=100&&tp_Y>=0){
+                        tp.style="left:"+100+"px;top:"+tp_Y+"px;";
+                    }else if(tp_X<=100&&tp_X<=0&&tp_Y<=100&&tp_Y>=0){
+                        tp.style="left:"+0+"px;top:"+tp_Y+"px;";
+                    }else if(tp_X<=100&&tp_X>=0&&tp_Y>=100&&tp_Y>=0){
+                        tp.style="left:"+tp_X+"px;top:"+100+"px;";
+                    }else if(tp_X<=100&&tp_X>=0&&tp_Y<=100&&tp_Y<=0){
+                        tp.style="left:"+tp_X+"px;top:"+0+"px;";
+                    }
+                    dt.style="background-position:"+(-tp_X*4)+"px "+(-tp_Y*4)+"px;"
+                }
+                tp.onmouseup = function(){
+                    tp.onmousemove = null;
+                }
+
+            }
+        }
+        yt.onmouseout=function(){
+            tp.style.display="none";
+            dt.style.display="none";
+        }
+
+
+    }
+</script>
+</head>
+<body>
+    <div class="yt"><div class="tp"></div><img src=250.jpg alt=""></div>
+    <div class="dt"></div>
+</body>
+</html>
