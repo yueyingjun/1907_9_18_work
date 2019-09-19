@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .fang{
+            display: block;
+            width: 400px;
+            height: 255px;
+            margin: 50px;
+            position: relative;
+            border: 1px solid black;
+        }
+        .small-box{
+            position: relative;
+            z-index: 1;
+        }
+        .small-box img{
+            width: 100%;
+            height: 100%;
+        }
+        .float-box{
+            display: none;
+            width: 160px;
+            height: 120px;
+            position: absolute;
+            background: #e8ffe6;
+            border: 1px solid red;
+            opacity: 0.5;
+        }
+
+        .big-box{
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 410px;
+            width: 400px;
+            height: 300px;
+            overflow: hidden;
+            border: 1px solid red;
+            z-index: 1;
+        }
+        .big-box img{
+            position: absolute;
+            z-index: 5;
+        }
+
+    </style>
+    <script>
+        window.onload=function () {
+
+            var fang = document.querySelector(".fang")
+            var samllbox = document.querySelector(".small-box")
+            var floatbox = document.querySelector(".float-box")
+            var bigbox = document.querySelector(".big-box")
+           var img=bigbox.getElementsByTagName("img")[0];
+            samllbox.onmouseover = function () {
+                floatbox.style.display = "block"
+                bigbox.style.display = "block"
+            }
+            samllbox.onmouseout = function () {
+                floatbox.style.display = "none";
+                bigbox.style.display = "none"
+            }
+            samllbox.onmousemove = function (e) {
+                var left = e.clientX - fang.offsetLeft - samllbox.offsetLeft - floatbox.offsetWidth / 2
+                var top = e.clientY - fang.offsetTop - samllbox.offsetTop - floatbox.offsetHeight / 2
+
+                floatbox.style.left = left + "px"
+                floatbox.style.top = top + "px"
+
+                // var percentX = left / (samllbox.offsetWidth - floatbox.offsetWidth);
+                // var percentY = top / (samllbox.offsetHeight - floatbox.offsetHeight)
+                //
+                // // img.style.left = -percentX(img.offsetWidth - bigbox.offsetWidth) + "px"
+                // // img.style.top = -percentY(img.offsetHeight - bigbox.offsetHeight) + "px"
+                // img.style.left=100
+                // img.style.right=100
+                  var percentX=left/(samllbox.offsetWidth-floatbox.offsetWidth);
+                var percentY=top/(samllbox.offsetHeight-floatbox.offsetHeight);
+
+                //4利用这个比例计算距离后赋值给右侧的图片
+                img.style.left=-percentX*(img.offsetWidth-bigbox.offsetWidth)+"px";
+                img.style.top=-percentY*(img.offsetHeight-bigbox.offsetHeight)+"px";
+            }
+        }
+    </script>
+
+</head>
+<body>
+<!--       <div class="fang">-->
+<!--           <div class="small-box">-->
+<!--               <div class="mark"></div>-->
+<!--               <div class="float-box"></div>-->
+<!--               <img src="img/1.jpg"/>-->
+<!--           </div>-->
+<!--           <div class="big-box">-->
+<!--               <img src="img/1.jpg"/>-->
+<!--           </div>-->
+<!--       </div>-->
+<div class="fang">
+    <div class="small-box">
+        <div class="float-box"></div>
+        <img src="img/1.jpg"/>
+    </div>
+    <div class="big-box">
+        <img src="img/1.jpg"/>
+    </div>
+</div>
+</body>
+</html>
