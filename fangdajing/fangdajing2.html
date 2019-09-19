@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            height: 360px;
+            width: 300px;
+        }
+        .middleBox{
+            height: 300px;
+            width: 300px;
+        }
+        .mask{
+            height: 100px;
+            width: 100px;
+            background: rgba(0,0,255,0.3);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .middleMask{
+            height: 300px;
+            width: 300px;
+            position: absolute;
+            left: 0px;top: 0px;
+        }
+        .middleBox img{
+            height: 300px;
+            width: 300px;
+        }
+        .smallBox{
+            height: 53px;
+            width: 300px;
+            margin-top: 0px;
+        }
+        .smallBox img{
+            height: 50px;
+            width: 50px;
+            float: left;
+        }
+        .bigBox{
+            height: 300px;
+            width: 300px;
+            position: absolute;
+            left: 310px;
+            top: 0px;
+            visibility: hidden;
+            overflow: hidden;
+        }
+        .bigBox img{
+            height:900px ;
+            width: 900px;
+            position: absolute;
+            left: 0px;top: 0px;
+        }
+
+    </style>
+    <script>
+        window.onload =function () {
+            var smallBox = document.querySelector(".smallBox");
+            var middleBox = document.querySelector(".middleBox");
+            var bigBox = document.querySelector(".bigBox");
+
+            var smallImg = document.querySelectorAll(".smallBox img");
+            var middleImg = document.querySelector(".middleBox img");
+            var bigImg = document.querySelector(".bigBox img");
+
+            var mask = document.querySelector(".mask");
+            var middleMask = document.querySelector(".middleMask");
+            //设置选项卡
+            for(let i = 0;i<smallImg.length;i++){
+                smallImg[i].onclick = function(){
+                    middleImg.src = "../imgtianmao/m"+(i+1)+".jpg";
+                    bigImg.src = "../imgtianmao/b"+(i+1)+".jpg";
+                }
+            }
+
+            middleMask.onmouseover=function(){
+                var ow = middleMask.offsetWidth;
+                var oh = middleMask.offsetHeight;
+                middleMask.onmousemove =function(e){
+                    var ox = e.offsetX;
+                    var oy = e.offsetY;
+
+                    var maskWidth = ox-(mask.offsetWidth/2)
+                    var maskHeight = oy-(mask.offsetHeight/2)
+
+                    if(maskWidth<0){
+                        maskWidth=0
+                    }
+                    if(maskHeight<0){
+                        maskHeight=0
+                    }
+                    if(maskWidth>ow-mask.offsetWidth){
+                        maskWidth=ow-mask.offsetWidth
+                    }
+                    if(maskHeight>oh-mask.offsetHeight){
+                        maskHeight=oh-mask.offsetHeight
+                    }
+
+                    bigImg.style.visibility = "visible";
+                    bigImg.style.left = -maskWidth*3 +"px";
+                    bigImg.style.top = -maskHeight*3 +"px";
+
+                    mask.style.left = maskWidth + "px";
+                    mask.style.top = maskHeight + "px";
+                }
+                middleMask.onmouseout=function(e){
+                    middleMask.onmouseover=null;
+                    bigImg.style.visibility = "hidden"
+                }
+            }
+
+
+
+
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <div class="middleBox">
+        <img src="../imgtianmao/m1.jpg" alt="">
+        <div class="mask"></div>
+    </div>
+    <div class="middleMask"></div>
+    .
+    <div class="smallBox">
+        <img src="../imgtianmao/s1.jpg" alt="">
+        <img src="../imgtianmao/s2.jpg" alt="">
+    </div>
+</div>
+<div class="bigBox">
+    <img src="../imgtianmao/b1.jpg" alt="">
+</div>
+
+</div>
+
+
+</body>
+</html>
